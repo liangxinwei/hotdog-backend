@@ -63,5 +63,4 @@ dist
 client-dist
 .idea
 .vscode
-pre_dist/
-script/production.js
+pre_dist

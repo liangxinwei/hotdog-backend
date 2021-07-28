@@ -1,27 +1,26 @@
 module.exports = {
-  root: true,
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
     'prettier',
+    'prettier/@typescript-eslint',
   ],
-  parserOptions: {
-    ecmaVersion: 2018,
-    'sourceType': 'module'
+  root: true,
+  env: {
+    node: true,
+    jest: true,
   },
+  ignorePatterns: ['.eslintrc.js'],
   rules: {
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
-    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/no-explicit-any': 1,
-    '@typescript-eslint/indent': ['error', 2],
-    '@typescript-eslint/no-inferrable-types': [
-      'warn', {
-        'ignoreParameters': true
-      }
-    ],
-    '@typescript-eslint/no-unused-vars': 'warn'
-  }
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+  },
 };

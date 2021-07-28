@@ -1,13 +1,9 @@
 const types = [
   'feat',
-  'ci',
   'docs',
-  'remove',
   'fix',
   'update',
-  'refactor',
   'test',
-  'revert',
 ];
 
 module.exports = {
