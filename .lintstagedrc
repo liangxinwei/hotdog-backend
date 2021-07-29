@@ -1,8 +1,8 @@
 {
-  "(src|docs)/**/*.{json,md,css,less}": [
+  "(src|test|docs)/**/*.{json,md,css,less}": [
     "prettier --write"
   ],
-  "(src|docs)/**/*.{js,ts}": [
+  "(src|test|docs)/**/*.{js,ts}": [
     "eslint --fix",
     "prettier --write"
   ]
