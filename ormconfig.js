@@ -1,10 +1,12 @@
+/* eslint-disable no-process-env */
+
 module.exports = {
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : null,
-  username: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
+  host: process.env.MYSQL_HOST,
+  port: process.env.MYSQL_PORT ? parseInt(process.env.DB_PORT, 10) : 3306,
+  username: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
   entities: [__dirname + '/src/**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   migrationsRun: false,
@@ -16,5 +18,5 @@ module.exports = {
   // This is used to typecast server date/time values to JavaScript Date object and vice versa.
   timezone: 'Z',
   synchronize: false,
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV !== 'production',
 };
