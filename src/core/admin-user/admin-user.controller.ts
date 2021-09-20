@@ -7,6 +7,6 @@ export class AdminUserController {
 
   @Post('find')
   async findUser(@Body() body: any) {
-    return this.adminUserService.findAdminUser(body.username);
+    return this.adminUserService.findOne(body.username);
   }
 }

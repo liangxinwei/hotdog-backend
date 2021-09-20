@@ -1,8 +1,8 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AdminUserModule } from './core/admin-user/admin-user.module';
+import { AppController } from 'src/app.controller';
+import { AppService } from 'src/app.service';
+import { AdminUserModule } from 'src/core';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), AdminUserModule],

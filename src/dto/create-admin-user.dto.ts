@@ -1,3 +1,3 @@
-export class CreateAdminUserDto {
+export class CreateAdminUser {
   account: string;
 }
