@@ -1,15 +1,7 @@
-const types = [
-  'feat',
-  'docs',
-  'fix',
-  'update',
-  'test',
-];
+const types = ['feat', 'docs', 'fix', 'update', 'test'];
 
 module.exports = {
-  extends: [
-    '@commitlint/config-conventional'
-  ],
+  extends: ['@commitlint/config-conventional'],
   rules: {
     'scope-case': [0],
     'scope-empty': [0],
