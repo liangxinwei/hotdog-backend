@@ -13,10 +13,10 @@ export class AdminUser {
   name: string;
 
   @Column()
-  password: string;
+  passwd: string;
 
   @Column()
-  passwordSalt: string;
+  passwdSalt: string;
 
   @Column()
   tel: string;

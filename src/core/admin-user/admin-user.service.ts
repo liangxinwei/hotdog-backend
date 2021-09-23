@@ -57,9 +57,9 @@ export class AdminUserService {
     const hashPwd = encryptPassword(body.password, salt);
     try {
       const newAdminUser = await this.adminUserRepository.save({
-        ...pick(body, ['password', 'rePassword']),
-        password: hashPwd,
-        passwordSalt: salt,
+        ...pick(body, ['passwd', 'passwdSalt']),
+        passwd: hashPwd,
+        passwdSalt: salt,
       });
 
       return {

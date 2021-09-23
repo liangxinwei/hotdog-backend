@@ -17,8 +17,8 @@ export class AuthService {
   async validateAdminUser(account: string, password: string) {
     const { data: adminUser } = await this.adminUserService.findOne(account);
     if (adminUser) {
-      const hashedPassword = adminUser.password;
-      const salt = adminUser.passwordSalt;
+      const hashedPassword = adminUser.passwd;
+      const salt = adminUser.passwdSalt;
       const hashPassword = encryptPassword(password, salt);
       if (hashPassword === hashedPassword) {
         return {

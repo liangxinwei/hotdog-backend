@@ -14,12 +14,6 @@ const envList = [
   'REDIS_PORT',
   'REDIS_PASSWORD',
   'REDIS_DB',
-  // mysql 配置验证
-  'MYSQL_HOST',
-  'MYSQL_PORT',
-  'MYSQL_USER',
-  'MYSQL_PASSWORD',
-  'MYSQL_DATABASE',
 ] as const;
 
 /**

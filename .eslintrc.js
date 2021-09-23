@@ -4,15 +4,25 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin', 'simple-import-sort'],
-  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended', 'prettier'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    "simple-import-sort",
+  ],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+    'prettier',
+  ],
   root: true,
   env: {
+    es6: true,
     node: true,
     jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -61,7 +71,5 @@ module.exports = {
       { blankLine: 'always', prev: 'multiline-expression', next: '*' },
       { blankLine: 'always', prev: 'function', next: '*' },
     ],
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
   },
 };
