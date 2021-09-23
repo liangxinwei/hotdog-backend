@@ -1,4 +1,4 @@
-export class CreateAdminUser {
+export class CreateUser {
   account: string;
   name?: string;
   password: string;

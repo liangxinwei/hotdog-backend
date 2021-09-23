@@ -11,7 +11,7 @@
 
 ## 说明
 > 开发环境 macOS 10.15.4 Node.js v14.15.3 MySQL 8.0.12
-    
+
 > 部署环境 腾讯云 CentOS 7.2 64位
 
 > 此项目主要用于学习使用 TypeScript 开发 Node.js 项目，不用于任何商业用途。
@@ -49,4 +49,4 @@ $ npm run test:cov
 ```
 
 ## API接口文档
-[hotdog-backend 接口文档](https://github.com/liangxinwei/hotdog-backend/blob/master/API.md)
+todo swagger ui

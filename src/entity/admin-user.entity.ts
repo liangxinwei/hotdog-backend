@@ -1,8 +1,8 @@
-import { AdminUserStatusEnum, RoleEnum } from 'src/sdks';
+import { RoleEnum, UserStatusEnum } from 'src/sdks';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class AdminUser {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,9 +27,9 @@ export class AdminUser {
   role: RoleEnum;
 
   @Column({
-    default: AdminUserStatusEnum.Effective,
+    default: UserStatusEnum.Effective,
   })
-  status: AdminUserStatusEnum;
+  status: UserStatusEnum;
 
   @Column({
     default: 0,

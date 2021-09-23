@@ -2,21 +2,21 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { pick } from 'lodash';
 import { Response, ResponseStatus } from 'src/constants';
-import { CreateAdminUser } from 'src/dto';
-import { AdminUser } from 'src/entity';
+import { CreateUser } from 'src/dto';
+import { User } from 'src/entity';
 import { encryptPassword, makeSalt } from 'src/shared';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class AdminUserService {
+export class UserService {
   constructor(
-    @InjectRepository(AdminUser)
-    private readonly adminUserRepository: Repository<AdminUser>,
+    @InjectRepository(User)
+    private readonly userService: Repository<User>,
   ) {}
 
-  async findOne(account: string): Promise<Response<AdminUser | undefined>> {
+  async findOne(account: string): Promise<Response<User | undefined>> {
     try {
-      const adminUser = await this.adminUserRepository.findOne({ account });
+      const adminUser = await this.userService.findOne({ account });
 
       if (adminUser) {
         return {
@@ -37,7 +37,7 @@ export class AdminUserService {
     }
   }
 
-  async register(body: CreateAdminUser): Promise<Response<AdminUser | undefined>> {
+  async register(body: CreateUser): Promise<Response<User | undefined>> {
     if (body.password !== body.rePassword) {
       return {
         code: ResponseStatus.PASSWORD_ERROR,
@@ -56,7 +56,7 @@ export class AdminUserService {
     const salt = makeSalt();
     const hashPwd = encryptPassword(body.password, salt);
     try {
-      const newAdminUser = await this.adminUserRepository.save({
+      const newAdminUser = await this.userService.save({
         ...pick(body, ['passwd', 'passwdSalt']),
         passwd: hashPwd,
         passwdSalt: salt,

@@ -3,11 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { encryptPassword } from 'src/shared';
 
 import { ResponseStatus } from '../../constants';
-import { AdminUserService } from '../admin-user/admin-user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly adminUserService: AdminUserService, private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly adminUserService: UserService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   /**
    * JWT验证 2: 校验用户信息
@@ -43,7 +46,10 @@ export class AuthService {
    * JWT验证 3：处理 jwt 签证
    */
   async certificate(user: any) {
-    const payload = { account: user.account, id: user.id, name: user.name, role: user.role };
+    const payload = {
+      account: user.account,
+      sub: user.id,
+    };
 
     try {
       const token = this.jwtService.sign(payload);
@@ -55,8 +61,8 @@ export class AuthService {
       };
     } catch (error) {
       return {
-        code: 600,
-        msg: `账号或密码错误`,
+        code: ResponseStatus.PASSWORD_ERROR,
+        msg: '账号或密码错误',
       };
     }
   }

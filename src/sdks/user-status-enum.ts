@@ -1,4 +1,4 @@
-export enum AdminUserStatusEnum {
+export enum UserStatusEnum {
   /**
    * 失效
    */

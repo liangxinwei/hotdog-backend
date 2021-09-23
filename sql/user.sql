@@ -1,8 +1,8 @@
-------------------------------后台用户表--------------------------------
+------------------------------用户表--------------------------------
 
-DROP TABLE IF EXISTS `admin_user`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `admin_user` (
+CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   `account` varchar(24) NOT NULL COMMENT '用户账号',
   `name` varchar(20) NOT NULL COMMENT '真实姓名',
@@ -16,6 +16,6 @@ CREATE TABLE `admin_user` (
   `update_by` smallint(6) NOT NULL DEFAULT '0' COMMENT '修改人ID',
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='后台用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
-------------------------------后台用户表--------------------------------
+------------------------------用户表--------------------------------
