@@ -1,1 +1,1 @@
-export * from './admin-user.entity';
+export * from './user.entity';

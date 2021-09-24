@@ -38,7 +38,7 @@ export class UserService {
   }
 
   async register(body: CreateUser): Promise<Response<User | undefined>> {
-    if (body.password !== body.rePassword) {
+    if (body.passwd !== body.rePasswd) {
       return {
         code: ResponseStatus.PASSWORD_ERROR,
         msg: '两次密码输入不一致',
@@ -54,7 +54,7 @@ export class UserService {
     }
 
     const salt = makeSalt();
-    const hashPwd = encryptPassword(body.password, salt);
+    const hashPwd = encryptPassword(body.passwd, salt);
     try {
       const newAdminUser = await this.userService.save({
         ...pick(body, ['passwd', 'passwdSalt']),

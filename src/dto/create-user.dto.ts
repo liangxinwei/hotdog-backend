@@ -1,7 +1,16 @@
+import { IsNotEmpty } from 'class-validator';
+
 export class CreateUser {
-  account: string;
-  name?: string;
-  password: string;
-  rePassword: string;
-  tel?: string;
+  @IsNotEmpty()
+  readonly account: string;
+
+  readonly name?: string;
+
+  @IsNotEmpty()
+  readonly passwd: string;
+
+  @IsNotEmpty()
+  readonly rePasswd: string;
+
+  readonly tel?: string;
 }
