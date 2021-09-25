@@ -15,17 +15,17 @@ export enum ResponseStatus {
    */
   PASSWORD_ERROR = 2000,
   /**
-   * adminUser 用户找不到
+   * 用户不存在
    */
-  NO_ADMIN_USER = 2001,
+  USER_NOT_EXISTED = 2001,
   /**
-   * adminUser 用户已存在
+   * 用户已存在
    */
-  ADMIN_USER_EXISTED = 2001,
+  USER_EXISTED = 2002,
 }
 
 export type Response<T> = {
   data?: T;
-  code: HttpStatus | ResponseStatus;
-  msg?: string;
+  statusCode: HttpStatus | ResponseStatus;
+  message?: string;
 };
