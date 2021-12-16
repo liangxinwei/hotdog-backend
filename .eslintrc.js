@@ -40,6 +40,7 @@ module.exports = {
     'no-unused-expressions': 'off',
     'no-nested-ternary': 'off',
     'multiline-comment-style': 'off',
+    'prettier/prettier': 'off',
     'max-lines': [
       'error',
       {
