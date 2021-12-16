@@ -1,9 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { pick } from 'lodash';
-import { ResponseStatus } from 'src/constants';
-import { CreateUser } from 'src/dto';
+import { CreateUserDto } from 'src/dto';
 import { User } from 'src/entity';
+import { ResponseStatus } from 'src/sdks';
 import { encryptPassword, makeSalt } from 'src/shared';
 import { Repository } from 'typeorm';
 
@@ -18,7 +18,7 @@ export class UserService {
     return await this.userService.findOne({ account });
   }
 
-  async register(body: CreateUser): Promise<User> {
+  async register(body: CreateUserDto): Promise<User> {
     if (body.passwd !== body.rePasswd) {
       throw new HttpException(
         '两次密码输入不一致',

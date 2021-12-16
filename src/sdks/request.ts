@@ -24,8 +24,14 @@ export enum ResponseStatus {
   USER_EXISTED = 2002,
 }
 
-export type Response<T> = {
-  data?: T;
+export type SuccessResponse<T> = {
   statusCode: HttpStatus | ResponseStatus;
-  message?: string;
+  data: T;
 };
+
+export type ErrorResponse = {
+  statusCode: HttpStatus | ResponseStatus;
+  message: string;
+};
+
+export type Response<T> = SuccessResponse<T> | ErrorResponse;
