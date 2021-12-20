@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { pick } from 'lodash';
+import { omit } from 'lodash';
 import { CreateUserDto } from 'src/dto';
 import { User } from 'src/entity';
 import { ResponseStatus } from 'src/sdks';
@@ -18,23 +18,27 @@ export class UserService {
     return await this.userService.findOne({ account });
   }
 
-  async register(body: CreateUserDto): Promise<User> {
-    if (body.passwd !== body.rePasswd) {
+  async checkRegisteredUser(createUserDto: CreateUserDto) {
+    const user = await this.findOne(createUserDto.account);
+    if (user) {
+      throw new HttpException('用户已存在', ResponseStatus.USER_EXISTED);
+    }
+  }
+
+  async register(createUserDto: CreateUserDto): Promise<User> {
+    if (createUserDto.passwd !== createUserDto.rePasswd) {
       throw new HttpException(
         '两次密码输入不一致',
         ResponseStatus.PASSWORD_ERROR,
       );
     }
 
-    const user = await this.findOne(body.account);
-    if (user) {
-      throw new HttpException('用户已存在', ResponseStatus.USER_EXISTED);
-    }
+    await this.checkRegisteredUser(createUserDto);
 
     const salt = makeSalt();
-    const hashPwd = encryptPassword(body.passwd, salt);
+    const hashPwd = encryptPassword(createUserDto.passwd, salt);
     return await this.userService.save({
-      ...pick(body, ['passwd', 'passwdSalt']),
+      ...omit(createUserDto, ['passwd', 'passwdSalt']),
       passwd: hashPwd,
       passwdSalt: salt,
     });

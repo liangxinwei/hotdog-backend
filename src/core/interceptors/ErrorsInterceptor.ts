@@ -2,6 +2,7 @@ import {
   CallHandler,
   ExecutionContext,
   HttpException,
+  HttpStatus,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
@@ -14,15 +15,20 @@ export class ErrorsInterceptor implements NestInterceptor {
     return next.handle().pipe(
       catchError((error): any => {
         if (error instanceof HttpException) {
-          return Promise.resolve({
-            statusCode: error.getStatus(),
-            message: error.getResponse(),
-          });
+          const status = error.getStatus();
+          if (status === HttpStatus.BAD_REQUEST) {
+            return Promise.resolve(error.getResponse());
+          } else {
+            return Promise.resolve({
+              statusCode: error.getStatus(),
+              message: error.getResponse(),
+            });
+          }
         }
 
         return Promise.resolve({
           statusCode: 500,
-          message: `出现了意外错误：${error.toString()}`,
+          message: error.toString(),
         });
       }),
     );
