@@ -7,7 +7,8 @@ export class CreateUserDto {
   readonly account: string;
 
   @ApiProperty({ description: '用户名' })
-  readonly name?: string;
+  @IsNotEmpty()
+  readonly name: string;
 
   @ApiProperty({ description: '密码' })
   @IsNotEmpty()
