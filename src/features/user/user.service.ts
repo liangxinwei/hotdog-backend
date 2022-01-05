@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { omit } from 'lodash';
 import { CreateUserDto } from 'src/dto';
@@ -11,15 +11,35 @@ import { Repository } from 'typeorm';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly userService: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
-  async findOne(account: string): Promise<User> {
-    return await this.userService.findOne({ account });
+  async findAll() {
+    return await this.userRepository.find();
+  }
+
+  async findOneById(id: number) {
+    const user = await this.userRepository.findOne({ id });
+
+    if (!user) {
+      throw new NotFoundException('这个用户不存在。');
+    }
+
+    return user;
+  }
+
+  async findOneByAccount(account: string) {
+    const user = await this.userRepository.findOne({ account });
+
+    if (!user) {
+      throw new NotFoundException('这个用户不存在');
+    }
+
+    return user;
   }
 
   async checkRegisteredUser(createUserDto: CreateUserDto) {
-    const user = await this.findOne(createUserDto.account);
+    const user = await this.findOneByAccount(createUserDto.account);
     if (user) {
       throw new HttpException('用户已存在', ResponseStatus.USER_EXISTED);
     }
@@ -37,7 +57,7 @@ export class UserService {
 
     const salt = makeSalt();
     const hashPwd = encryptPassword(createUserDto.passwd, salt);
-    return await this.userService.save({
+    return await this.userRepository.save({
       ...omit(createUserDto, ['passwd', 'passwdSalt']),
       passwd: hashPwd,
       passwdSalt: salt,

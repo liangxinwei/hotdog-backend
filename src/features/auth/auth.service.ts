@@ -19,7 +19,7 @@ export class AuthService {
    * @param password
    */
   async validateAdminUser(account: string, password: string): Promise<User> {
-    const user = await this.adminUserService.findOne(account);
+    const user = await this.adminUserService.findOneByAccount(account);
     if (!user) {
       throw new HttpException('用户不存在', ResponseStatus.USER_NOT_EXISTED);
     }
