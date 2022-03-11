@@ -4,5 +4,7 @@ services:
   cli:
     image: nestjs/cli
     volumes:
-    - ./app/workspace
+      # 让当前目录下的 app 这个目录，对应容器里的 /workspace 这个位置
+      - ./src:/workspace
+    # 为了让这个容器一直运行
     tty: true

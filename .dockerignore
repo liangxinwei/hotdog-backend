@@ -4,3 +4,6 @@ dist
 .git
 .env
 local
+**/*.js.map
+**/*.d.ts
+**/tsconfig.build.tsbuildinfo
